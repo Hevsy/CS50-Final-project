@@ -14,7 +14,9 @@ from .config import db_config
 
 
 def db_init():
-    """Create db URL & engine"""
+    """ Creates the database engine and tables required by the application."""
+
+    # Create the database URL from configuration values
     db_url = URL.create(
         db_config["type"],
         database=db_config["db"],
@@ -22,7 +24,10 @@ def db_init():
         password=db_config["pass"],
         host=db_config["host"],
     )
+
+    # Create an engine to connect to the database
     engine = create_engine(db_url)
+
     # Initialise database
     if not database_exists(engine.url):
         create_database(engine.url)
@@ -38,6 +43,7 @@ def db_init():
         Column("username", String(30)),
         Column("hash", String(255)),
     )
+
     destinations_table = Table(
         "destinations",
         meta,
@@ -66,4 +72,6 @@ def db_init():
 
     # Create tables
     meta.create_all(engine, checkfirst=True)
+
+    # Return engine and tables
     return engine, users_table, destinations_table, ideas_table

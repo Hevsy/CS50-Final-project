@@ -59,6 +59,7 @@ def not_found(e):
 @app.route("/")
 def index():
     """Homepage"""
+    # Check whether user has logged in and return appropriate page
     if session.get("user_id") is None:
         return render_template("index.html")
     else:
@@ -71,9 +72,11 @@ def register():
     if request.method == "GET":
         return render_template("register.html")
     else:
+        # Collect data from the request form
         username = request.form.get("username")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
+        # Ensure username, password & confirmation were submitted
         if not username or not password or not confirmation:
             return apology("Must provide username and password!")
         elif password != confirmation:
@@ -84,7 +87,7 @@ def register():
             return apology("Username already exists")
         else:
             register_user(username, password)
-        # Remember which user has registered and log they in
+        # Remember which user has registered and log they in (eg store user_id in session)
         with engine.begin() as db:
             user_id = db.execute(
                 select(users_table.c["id"]).where(users_table.c.username == username)
@@ -145,27 +148,36 @@ def logout():
 @app.route("/pwdchange", methods=["GET", "POST"])
 def pwdchange():
     """Change user's password"""
+
+    # If request method is GET, return password change form
     if request.method == "GET":
-        # Return password change form
         return render_template("pwdchange.html")
+
+    # If request method is POST, change the password
     else:
-        # Change the password
+        # Begin a transaction with the database
         with engine.begin() as db:
+            # Get the user's current password hash from the database
             hash = db.execute(
                 select(users_table.c.hash).where(users_table.c.id == session["user_id"])
             ).scalar()
+
+            # Get the old password, new password, and confirmation from the form
             old_password = request.form.get("old_password")
             new_password = request.form.get("new_password")
             confirmation = request.form.get("confirmation")
-            # Check input for valifity
+
+            # Check input for validity
             if not old_password or not new_password or not confirmation:
                 return apology("Must provide old and new passwords", 403)
             elif not check_password_hash(hash, old_password):  # type: ignore
                 return apology("Invalid password", 403)
             elif new_password != confirmation:
                 return apology("Passwords do not match!", 403)
-            # Update database with new password
+
+            # Generate a new hash for the new password
             new_hash = generate_password_hash(new_password)
+            # Update the user's password hash in the database
             db.execute(
                 update(users_table)
                 .where(users_table.c.id == session["user_id"])
@@ -311,7 +323,7 @@ def dest_delete():
 @login_required
 def ideas():
     """Ideas page for selected destination"""
-    # Check if page has been accessed via POST or whether dest_id is stored in the session
+    # If page has been accessed via POST (dest_id was supplied via from) or whether dest_id is stored in the session, render ideas page
     if request.method == "POST" or session.get("dest_id"):
         action = request.form.get("action")
         user_id = session["user_id"]
@@ -426,10 +438,6 @@ def move_day_daown():
         return redirect("/ideas")
 
 
-if __name__ == "__main__":
-    app.run()
-
-
 @app.route("/dest-complete", methods=["GET", "POST"])
 @login_required
 def dest_complete():
@@ -490,3 +498,7 @@ def idea_complete():
             )
         session["dest_id"] = dest_id
         return redirect("/ideas")
+
+
+if __name__ == "__main__":
+    app.run()
