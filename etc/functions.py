@@ -32,7 +32,7 @@ def strip_args(args):
 
 def register_user(username, password):
     """Add a user to DB"""
-    from app.app import engine, users_table
+    from app import engine, users_table
 
     with engine.begin() as db:
         hash = generate_password_hash(password)
@@ -41,7 +41,7 @@ def register_user(username, password):
 
 def check_if_username_exists(username):
     """Check is username already exists in DB"""
-    from app.app import engine, users_table
+    from app import engine, users_table
 
     with engine.begin() as db:
         result = db.execute(
@@ -52,7 +52,7 @@ def check_if_username_exists(username):
 
 def get_dest_by_id(dest_id, user_id):
     """Returns all ideas for specified dest_id plus data about that destination required for ideas templates"""
-    from app.app import engine, destinations_table
+    from app import engine, destinations_table
 
     # Get the destination's data by id to show in the template
     with engine.begin() as db:
@@ -76,7 +76,7 @@ def get_dest_by_id(dest_id, user_id):
 
 def get_ideas(dest_id, user_id):
     """Returns all ideas for specified dest_id"""
-    from app.app import engine, ideas_table
+    from app import engine, ideas_table
 
     # Get the ideas by destination's id to show in the template
     with engine.begin() as db:
@@ -98,7 +98,7 @@ def get_ideas(dest_id, user_id):
 
 def delete_idea(user_id, dest_id, id):
     """Deletes an idea from db"""
-    from app.app import engine, ideas_table
+    from app import engine, ideas_table
 
     with engine.begin() as db:
         db.execute(
@@ -122,7 +122,7 @@ def render_ideas(user_id, dest_id):
 
 def day_add(user_id, dest_id):
     """Adds a day to selected destination"""
-    from app.app import engine, destinations_table
+    from app import engine, destinations_table
 
     with engine.begin() as db:
         # Check how many days and increment by 1
@@ -148,7 +148,7 @@ def day_add(user_id, dest_id):
 
 def day_delete(user_id, dest_id, day_to_remove):
     """Delete a day from selected destination"""
-    from app.app import engine, destinations_table, ideas_table
+    from app import engine, destinations_table, ideas_table
 
     with engine.begin() as db:
         # Check how many days in the current destination
@@ -213,7 +213,7 @@ def day_delete(user_id, dest_id, day_to_remove):
 
 def move_day(user_id, dest_id, day, step):
     """Moves the day up or down"""
-    from app.app import engine, ideas_table
+    from app import engine, ideas_table
 
     with engine.begin() as db:
         dest = get_dest_by_id(dest_id, user_id)
