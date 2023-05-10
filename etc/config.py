@@ -19,7 +19,7 @@ match env:
         }
     case "TEST":
         db_config = {
-            "type": "mysql+mysqldb",
+            "type": "mysql+pymysql",
             "username": os.getenv("USERNAME"),
             "pass": os.getenv("PASS"),
             "host": os.getenv("HOST"),
@@ -27,7 +27,7 @@ match env:
         }
     case "PROD":
         db_config = {
-            "type": "mysql+mysqldb",
+            "type": "mysql+pymysql",
             "username": os.getenv("USERNAME"),
             "pass": os.getenv("PASS"),
             "host": os.getenv("HOST"),
