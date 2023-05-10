@@ -1,6 +1,6 @@
 # Travel Companion
 
-**Final Project for CS50x Course**
+## Final Project for CS50x Course
 
 This is a web application built with Flask, SQLAlchemy, MySQL, HTML/CSS, and JavaScript that allows users to store and organize their travel plans and activities.
 
@@ -11,16 +11,16 @@ This is a web application built with Flask, SQLAlchemy, MySQL, HTML/CSS, and Jav
 The Travel Companion app allows users to create notebooks for their travel plans, where they can store ideas, places of interest, and links organized by destination. The app includes features such as user registration and authentication, creating, editing, and deleting notebooks, adding and removing destinations from notebooks, and adding and editing notes, links, and ideas for each destination.
 Inside each destination, any number of days can be created and organised. Days can be populated with ideas, notes and links. App allows user to move, edit, mark as complete and delete destinations, days and ideas.
 
-
 ## Installation and configuration
 
 Application was designed and tested on Ubuntu-22.04. While it may run on other operating systems, it was not tested outside of this environment.
+
 ### Prerequisites
 
 Before installing and running the Travel Companion application, you will need to have a MySQL server up and running on your system or on some other machine in your netwrok, that can be accessed by the app.
 Ensure that you have the correct credentials for the MySQL server, including the hostname, username, and password, as you will need to add them to the `.env` file when configuring the Travel Companion application.
 
-# Installation
+### Installation
 
 To install and run *Travel Companion* in a test mode, follow these steps:
 
@@ -49,10 +49,10 @@ For a production environment, it's recommended to use a WSGI server like Gunicor
 
 Initially, I was planning to use Django framework, but it is notoriously challenging to master and I pivoted to Flask as a familiar ground, so I could spend more time on actual design and coding.
 
-I am planning to eventually put this application out on the web, so I was designing backend with real world scenarios in mind. Primarily it resulted in using MySQL as the backend database for its scalability and reliability. I am well versed in AWS services, so putting such a database on AWS RDS service will be an easy task. 
+I am planning to eventually put this application out on the web, so I was designing backend with real world scenarios in mind. Primarily it resulted in using MySQL as the backend database for its scalability and reliability. I am well versed in AWS services, so putting such a database on AWS RDS service will be an easy task.
 I was debating between PostgreSQL and MySQL, but I already used Postgres for my other projects, so decided to try MySQL to get some experience with it. SQLAlchemy was chosen to interact with the MySQL database. I’ve separated all DB configuration and initialization routines into separate modules `etc\config.py` and `etc\db-init.py`, so the main app could be DB-agnostic.
 
-At first, I got all DB credentials hardcoded into the `config.py`, but to follow recommended security practices, I moved them to environmental variables and later amended `config.py` to cater for DEV/TEST/PROD environments. 
+At first, I got all DB credentials hardcoded into the `config.py`, but to follow recommended security practices, I moved them to environmental variables and later amended `config.py` to cater for DEV/TEST/PROD environments.
 
 For UI and frontend, I decided to use Bootstrap and the [StartBootsrtap Admin 2 template](https://startbootstrap.com/theme/sb-admin-2) for the HTML styling. This allowed me to quickly create a professional-looking interface without having to spend a lot of time on CSS. Still, I ended up spending a bit of time refining the template to upgrade it from Bootsrap 4 to Boostrap 5.
 
