@@ -22,7 +22,7 @@ Ensure that you have the correct credentials for the MySQL server, including the
 
 *OR*
 
-For running the application in Development environment, SQLite must be installed on target system and `.env` file must be configured for Development environment (see the example file `etc/.env.example` for details)
+For running the application in Development environment, SQLite must be installed on target system and `.env` file must be configured for Development environment (see the example file `etc/.env.example` for details). sqlite3 is a standard pyhton library, so usually first requirement in this section is satisfied by default.
 
 ### Installation
 
