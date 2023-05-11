@@ -20,6 +20,10 @@ The application was designed and tested on Ubuntu-22.04. While it may run on oth
 Before installing and running the Travel Companion application, you will need to have a MySQL server up and running on your system or on some other machine in your network, that can be accessed by the application.
 Ensure that you have the correct credentials for the MySQL server, including the hostname, username, and password, as you will need to add them to the `.env` file when configuring the Travel Companion application.
 
+*OR*
+
+For running the application in Development environment, SQLite must be installed on target system and `.env` file must be configured for Development environment (see the example file `etc/.env.example` for details)
+
 ### Installation
 
 To install and run *Travel Companion* in a test mode, follow these steps:
