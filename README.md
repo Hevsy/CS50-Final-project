@@ -62,4 +62,4 @@ For UI and frontend, I decided to use Bootstrap and the [StartBootsrtap Admin 2 
 
 ## Additional links
 
-The latest version of the app can be found at [Travel Companion GitHub repository](https://github.com/Hevsy/Travel-Companion)
+The latest version of the app can be found in [Travel Companion GitHub repository](https://github.com/Hevsy/Travel-Companion)
