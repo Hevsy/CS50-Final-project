@@ -4,7 +4,7 @@
 
 This is a web application built with Flask, SQLAlchemy, MySQL, HTML/CSS, and JavaScript that allows users to store and organise their travel plans and activities.
 
-### Video Demo:  <URL HERE>
+### Video Demo:  <https://youtu.be/RBiT4DjzGXA>
 
 ## Description
 
