@@ -9,5 +9,5 @@ venv/
 TC.session.sql
 .mypy*
 .github
-finance.db
+*.db
 .env
