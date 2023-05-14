@@ -6,7 +6,7 @@ flask_session
 venv/
 .vscode
 .vscode/
-TC.session.sql
+*.sql
 .mypy*
 .github
 *.db
